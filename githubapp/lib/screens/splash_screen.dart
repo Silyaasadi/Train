@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import ' ForgotPasswordScreen.dart';
+import 'package:githubapp/screens/login_page.dart';
+
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class SplashScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(

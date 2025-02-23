@@ -1,109 +1,187 @@
-import 'package:flutter/material.dart';
-import 'HomePage.dart';
-import 'page-inscription.dart';
-import 'package:flutter/material.dart';
-import 'HomePage.dart';
-import 'page-inscription.dart';
 
-class LoginPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:githubapp/screens/page-inscription.dart';
+
+import ' ForgotPasswordScreen.dart';
+import 'HomePage.dart';
+
+class SignInScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  bool _isPasswordVisible = false;
+class _SignInScreenState extends State<SignInScreen> {
+  bool _isPasswordVisible = false; // État pour la visibilité du mot de passe
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.lightBlue.shade100, Colors.grey],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          image: DecorationImage(
+            image: AssetImage('assets/images/image-backround.png'),
+            fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 80),
-            Image.asset("assets/images/image-backround.png", width: 720, height: 300),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(20),
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 5)),
-                ],
-              ),
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Nom d'utilisateur",
-                      icon: Icon(Icons.person, color: Colors.indigo),
-                    ),
-                  ),
-                  Divider(color: Colors.grey.shade300),
-                  TextField(
-                    obscureText: !_isPasswordVisible,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Mot de passe",
-                      icon: Icon(Icons.lock, color: Colors.indigo),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                          color: Colors.indigo,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {},
-              child: Text("Mot de passe oublié ?", style: TextStyle(color: Colors.white70)),
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-              },
-              child: Container(
-                height: 50,
-                width: 180,
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 70.0),
+              Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Colors.indigo, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
                   color: Colors.white,
                 ),
-                child: Center(
-                  child: Text("Se connecter",
-                      style: TextStyle(color: Colors.lightBlue.shade900, fontSize: 18, fontWeight: FontWeight.bold)),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Nom d'utilisateur",
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(16.0),
+                    icon: Icon(Icons.person, color: Colors.indigo),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
-              },
-              child: Text("Créer un compte", style: TextStyle(color: Colors.white, fontSize: 16)),
-            ),
-          ],
+              SizedBox(height: 16.0),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.indigo, width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Colors.white,
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Mot de passe",
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(16.0),
+                    icon: Icon(Icons.lock, color: Colors.indigo),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.indigo,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                    ),
+                  ),
+                  obscureText: !_isPasswordVisible,
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      // Naviguer vers la page de réinitialisation du mot de passe
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ForgotPasswordScreen()), // Naviguer vers ForgotPasswordScreen
+                      );
+                    },
+                    child: Text(
+                      'Mot de passe oublié ?',
+                      style: TextStyle(color: Colors.indigo),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.0),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.indigo,
+                  padding: EdgeInsets.symmetric(horizontal: 120.0, vertical: 12.0),
+                ),
+                child: Text(
+                  'Se connecter',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 9.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Se connecter avec'),
+                ],
+              ),
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Bouton Facebook en cercle
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.facebook, color: Colors.indigo),
+                      iconSize: 30, // Ajustez la taille de l'icône
+                      onPressed: () {
+                        // Action pour Facebook
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  // Bouton Google en cercle
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.google, color: Colors.indigo),
+                      iconSize: 30, // Ajustez la taille ici aussi
+                      onPressed: () {
+                        // Action pour Google
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30.0),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+                },
+                child: Text(
+                  "Vous n'avez pas de compte ? Inscrivez-vous  ",
+                  style: TextStyle(color: Colors.black87, fontSize: 16),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
