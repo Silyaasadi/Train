@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:githubapp/screens/page-inscription.dart';
 
-import ' ForgotPasswordScreen.dart';
+import 'package:githubapp/screens/ForgotPasswordScreen.dart';
+
 import 'HomePage.dart';
 
 class SignInScreen extends StatefulWidget {

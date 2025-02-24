@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import ' ForgotPasswordScreen.dart';
+import 'package:githubapp/screens/ForgotPasswordScreen.dart';
+
 import 'package:githubapp/screens/login_page.dart';
 
 class SplashScreen extends StatelessWidget {
